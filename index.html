@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FusionAI Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #chatbox { width: 300px; height: 400px; border: 1px solid black; overflow-y: scroll; margin: auto; padding: 10px; }
+        #input { width: 250px; padding: 5px; }
+        #send { padding: 5px; }
+    </style>
+</head>
+<body>
+    <h1>FusionAI Chatbot</h1>
+    <div id="chatbox"></div>
+    <input type="text" id="input" placeholder="Type your message...">
+    <button id="send">Send</button>
+
+    <script>
+        const chatbox = document.getElementById("chatbox");
+        const input = document.getElementById("input");
+        const send = document.getElementById("send");
+
+        function botReply(userText) {
+            let response;
+            if (userText.includes("hello")) {
+                response = "Hi! I'm FusionAI. How can I help?";
+            } else {
+                response = "I'm still learning! Ask me something else.";
+            }
+            return response;
+        }
+
+        send.addEventListener("click", function() {
+            let userText = input.value;
+            if (userText.trim() === "") return;
+
+            let userDiv = `<div><b>You:</b> ${userText}</div>`;
+            let botDiv = `<div><b>FusionAI:</b> ${botReply(userText)}</div>`;
+
+            chatbox.innerHTML += userDiv + botDiv;
+            chatbox.scrollTop = chatbox.scrollHeight;
+            input.value = "";
+        });
+    </script>
+</body>
+</html>
